@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'XKTabBar.dart';
+import 'utils/RouterUtil.dart';
+import 'net/MyHttpClient.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -53,21 +55,20 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  void _httpClient() async {
+    new HttpClient().funGet('', null,
+            (value) => {
+        }
+    );
+  }
+
   Widget _buildRow(_title, _img, index) {
     return new ListTile(
       title: new Text(_title[index]),
       leading: new Image.asset(_img[index], width: 40.0,height: 40.0,fit: BoxFit.cover),
       subtitle: new Text('你高考满分了你知道吗？'),
       trailing: new Text('09:06'),
-      onTap: () {
-        Navigator.of(context).push(
-            new MaterialPageRoute(
-                builder: (context){
-                  return new XkTabBar();
-                }
-            )
-        );
-      },
+      onTap: RouterUtil.NavigatorPush(context, new XkTabBar())
     );
   }
 
