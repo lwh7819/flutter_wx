@@ -19,7 +19,7 @@ class _MInfoVCState extends State<MInfoVC>{
               height: 70.0,
               child: new ListTile(
                 title: new Text("头像"),
-                trailing: new Image.asset("images/xk.jpg",width: 45.0,height: 45.0, fit: BoxFit.cover,),
+                trailing: new Image.asset("assets/images/xk.jpg",width: 45.0,height: 45.0, fit: BoxFit.cover,),
               ),
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 var ctx;
+
 class FullScreenDialog extends StatefulWidget {
   final Widget child;
   final bool isCenter;
@@ -38,15 +39,15 @@ class _FullScreenDialogState extends State<FullScreenDialog> {
               highlightColor: Colors.transparent,
               child: new Stack(
                 children: widget.isCenter ? <Widget>[
-              new Center(
-              child: new InkWell(
-                child: widget.child,
-                onTap: () {},
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-              ),
-            ),
-              ] : <Widget>[
+                  new Center(
+                    child: new InkWell(
+                      child: widget.child,
+                      onTap: () {},
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                    ),
+                  ),
+                ] : <Widget>[
                   new Positioned(
                     child: new InkWell(
                       child: widget.child,
@@ -74,6 +75,6 @@ class _FullScreenDialogState extends State<FullScreenDialog> {
   }
 }
 
- void dismissDialog() {
-   Navigator.of(ctx).pop();
- }
+void dismissDialog() {
+  Navigator.of(ctx).pop();
+}

@@ -26,14 +26,15 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-        - images/img.jpg
-        - images/lebron.jpg
-        - images/xk.jpg
-        - images/a001.jpg
-        - images/a002.jpg
-        - images/a003.jpg
-        - images/a004.jpg
-        - images/a005.jpg
+        - assets/images/
+#        - assets/images/img.jpg
+#        - assets/images/lebron.jpg
+#        - assets/images/xk.jpg
+#        - assets/images/a001.jpg
+#        - assets/images/a002.jpg
+#        - assets/images/a003.jpg
+#        - assets/images/a004.jpg
+#        - assets/images/a005.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

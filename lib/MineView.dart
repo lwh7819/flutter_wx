@@ -21,7 +21,7 @@ class _MineViewState extends State {
               child: new Container(
                 height: 80.0,
                 child: new ListTile(
-                  leading: new Image.asset("images/a001.jpg", height: 50.0,
+                  leading: new Image.asset("assets/images/a001.jpg", height: 50.0,
                       width: 50.0,
                       fit: BoxFit.cover),
                   title: new Text("Lwh"),

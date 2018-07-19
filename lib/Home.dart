@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'XKTabBar.dart';
 import 'utils/RouterUtil.dart';
-import 'net/MyHttpClient.dart';
+import 'services/model.dart';
+import 'utils/PopUtil.dart';
+import 'view/BaseDialog.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -9,10 +11,34 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  String _val = '';
+
+  @override
+  void initState() {
+    super.initState();
+    httpClient(context, (String value) {
+      print("lwhh" + value);
+      setState((){
+        _val = value;
+      });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: _buildListView(),
+      body: new Builder(
+          builder: (BuildContext context) {
+            return _val == '' ? new FullScreenDialog(
+            isCenter: true,
+            child: new CircularProgressIndicator(
+            valueColor: new ValueColor(),
+            ),
+            canclable: false,
+            ) : _buildListView();
+          }
+      ),
     );
   }
 
@@ -27,19 +53,20 @@ class _HomeViewState extends State<HomeView> {
     _title.add('物理老师');
     _title.add('化学老师');
     List<String> _img = new List();
-    _img.add("images/img.jpg");
-    _img.add("images/a001.jpg");
-    _img.add("images/a002.jpg");
-    _img.add("images/a003.jpg");
-    _img.add("images/a004.jpg");
-    _img.add("images/a005.jpg");
-    _img.add("images/xk.jpg");
-    _img.add("images/lebron.jpg");
+    _img.add("assets/images/img.jpg");
+    _img.add("assets/images/a001.jpg");
+    _img.add("assets/images/a002.jpg");
+    _img.add("assets/images/a003.jpg");
+    _img.add("assets/images/a004.jpg");
+    _img.add("assets/images/a005.jpg");
+    _img.add("assets/images/xk.jpg");
+    _img.add("assets/images/lebron.jpg");
     List<Widget> _listTitles = new List();
     for (int i = 0; i < _title.length * 2; i++) {
       var index = i ~/ 2; // i初以2向下取整
-      if(i % 2 == 0) {
-        i == 0 ? null : _listTitles.add(new Divider(height: 16.0, indent: 16.0));
+      if (i % 2 == 0) {
+        i == 0 ? null : _listTitles.add(
+            new Divider(height: 16.0, indent: 16.0));
       } else {
         _listTitles.add(_buildRow(_title, _img, index));
       }
@@ -55,20 +82,14 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  void _httpClient() async {
-    new HttpClient().funGet('', null,
-            (value) => {
-        }
-    );
-  }
-
   Widget _buildRow(_title, _img, index) {
     return new ListTile(
-      title: new Text(_title[index]),
-      leading: new Image.asset(_img[index], width: 40.0,height: 40.0,fit: BoxFit.cover),
-      subtitle: new Text('你高考满分了你知道吗？'),
-      trailing: new Text('09:06'),
-      onTap: RouterUtil.NavigatorPush(context, new XkTabBar())
+        title: new Text(_title[index]),
+        leading: new Image.asset(
+            _img[index], width: 40.0, height: 40.0, fit: BoxFit.cover),
+        subtitle: new Text('你高考满分了你知道吗？'),
+        trailing: new Text('09:06'),
+        onTap: RouterUtil.NavigatorPush(context, new XkTabBar())
     );
   }
 

@@ -1,45 +1,77 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'package:flutter_wechat/utils/PopUtil.dart';
+import 'package:flutter/material.dart';
 import 'package:dio/src/Options.dart';
+import 'dart:convert';
+import 'package:flutter_wechat/utils/SnackBarUtil.dart';
+import 'dart:io';
 
 Dio _dio = null;
 
 class HttpClient {
-  HttpClient() {
+  Map<String, dynamic> headers;
+  String baseUrl;
+  ContentType contentType;
+
+  HttpClient({
+    this.headers,
+    this.baseUrl,
+    this.contentType})
+  {
     if (_dio == null) {
       _dio = new Dio();
     }
-    _dio.options.baseUrl = "https://httpbin.org/ip";
-    _dio.options.connectTimeout = 5000;
+    _dio.options.baseUrl = baseUrl == null ? "https://httpbin.org/ip" : baseUrl;
+    _dio.options.connectTimeout = 10000;
     _dio.options.receiveTimeout = 3000;
+    _dio.options.headers = headers ?? {};
+    _dio.options.contentType = contentType ?? null;
   }
 
-  void funGet(String path, Map<String, Object> params, callback) async{
-    Response response = await _dio.get(path, data: params);
-    String result = response.data.toString();
-    callback(result);
+  void Get(BuildContext ctx, String path, Map<String, Object> params,
+      callback) async {
+    _sendRequest(ctx,
+      path,
+      params,
+      callback,
+      new Options(method: 'GET'),
+    );
   }
 
-  void funPost(String path, Map<String, Object> params) async {
-     await _dio.post(path, data: params);
+  void Post(BuildContext ctx, String path, Map<String, Object> params,
+      callback) async {
+    _sendRequest(ctx,
+      path,
+      params,
+      callback,
+      new Options(method: 'POST'),
+    );
   }
 
-  Future<Response> funPostForm(String path, FormData params) async {
-    Future<Response> response = null;
+  _sendRequest(ctx, path, params, callback, Options options,) async {
+//    showLoadingDialog(ctx);
     try {
-      response= (await _dio.post(path, data: params)) as Future<Response>;
+      print("start-------------------------------------->\nrequest:" + _dio.options.baseUrl + path +
+      "\nheader------------------------------------>" + _dio.options.headers.toString());
+      Response response = await _dio.request(
+          path, data: params, options: options);
+//      hideDialog();
+      if (response.statusCode == 200) {
+        String result = response.data.toString();
+        callback(result);
+      }
     } on DioError catch (e) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx and is also not 304.
+      showSnackBarWithButton(ctx, '服务器错误', '确定', () {});
+//      hideDialog();
       if (e.response != null) {
-        print(e.response.data);
+        print("e.response.data:" + e.response.data);
         print(e.response.headers);
         print(e.response.request);
       } else {
-        // Something happened in setting up or sending the request that triggered an Error
-        print(e.message);
+        print("e.message:" + e.message);
       }
     }
-    return response;
   }
+
 }
