@@ -43,7 +43,7 @@ class RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("微信"),
+        title: new Text("WeChat"),
         centerTitle: true,
         actions: <Widget>[
           new IconButton(icon: new Icon(Icons.add, color: Colors.white,), onPressed: (){Navigator.pushNamed(context, '/a');}),

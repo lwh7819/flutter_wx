@@ -20,7 +20,7 @@ class HttpClient1<T> {
     if (_dio == null) {
       _dio = new Dio();
     }
-    _dio.options.baseUrl = baseUrl == null ? "https://httpbin.org/ip.0" : baseUrl;
+    _dio.options.baseUrl = baseUrl == null ? "https://httpbin.org/ip" : baseUrl;
     _dio.options.connectTimeout = 10000;
     _dio.options.receiveTimeout = 3000;
     _dio.options.headers = headers ?? {};
