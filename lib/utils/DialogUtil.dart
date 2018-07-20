@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../view/BaseDialog.dart';
-import 'package:flutter_wechat/utils/uidata.dart';
+import 'package:flutter_wechat/utils/CommonData.dart';
 
 showLoadingDialog(ctx) {
   showDialog(

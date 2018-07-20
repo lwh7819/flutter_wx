@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'XKTabBar.dart';
-import 'utils/RouterUtil.dart';
-import 'services/model.dart';
-import 'utils/PopUtil.dart';
-import 'view/BaseDialog.dart';
+import 'package:flutter_wechat/pages/XKTabBar.dart';
+import '../utils/RouterUtil.dart';
+import '../services/ServierApi.dart';
+import '../utils/DialogUtil.dart';
+import '../view/BaseDialog.dart';
+import '../model/TestModel.dart';
+import 'CommonView.dart';
+
+Widget body;
 
 class HomeView extends StatefulWidget {
   @override
@@ -12,17 +16,13 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   String _val = '';
+  bool _isError = false;
+  String _errorMsg;
 
   @override
   void initState() {
     super.initState();
-    httpClient(context, (String value) {
-      print("lwhh" + value);
-      setState((){
-        _val = value;
-      });
-      },
-    );
+    _loadData()();
   }
 
   @override
@@ -30,13 +30,11 @@ class _HomeViewState extends State<HomeView> {
     return new Scaffold(
       body: new Builder(
           builder: (BuildContext context) {
-            return _val == '' ? new FullScreenDialog(
-            isCenter: true,
-            child: new CircularProgressIndicator(
-            valueColor: new ValueColor(),
-            ),
-            canclable: false,
-            ) : _buildListView();
+            _val == '' ? body = createLoadingView() : body = _buildListView();
+            if(_isError) {
+              body = createErrorView(_errorMsg, _loadData());
+            }
+            return body;
           }
       ),
     );
@@ -51,7 +49,7 @@ class _HomeViewState extends State<HomeView> {
     _title.add('科学老师');
     _title.add('生物老师');
     _title.add('物理老师');
-    _title.add('化学老师');
+    _title.add(_val);
     List<String> _img = new List();
     _img.add("assets/images/img.jpg");
     _img.add("assets/images/a001.jpg");
@@ -91,6 +89,31 @@ class _HomeViewState extends State<HomeView> {
         trailing: new Text('09:06'),
         onTap: RouterUtil.NavigatorPush(context, new XkTabBar())
     );
+  }
+
+  Function _loadData() {
+      return () {
+        setState(() {
+          _isError = false;
+        });
+        httpClient1(
+          context,
+              (Map map) {
+            TestModel testModel = new TestModel.fromJson(map);
+            print("lwhh" + testModel.origin);
+            setState(() {
+              _val = testModel.origin;
+            });
+          },
+              (error) {
+            print(error.toString());
+            setState(() {
+              _isError = true;
+              _errorMsg = error.toString();
+            });
+          },
+        );
+      };
   }
 
 }

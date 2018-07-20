@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Mine/MInfoVC.dart';
 import 'Mine/MWalletVC.dart';
-import 'utils/RouterUtil.dart';
+import '../utils/RouterUtil.dart';
 
 class MineView extends StatefulWidget {
   @override

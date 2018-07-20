@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import 'package:flutter_wechat/utils/PopUtil.dart';
+import 'package:flutter_wechat/utils/DialogUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/src/Options.dart';
 import 'dart:convert';

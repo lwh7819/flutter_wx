@@ -9,11 +9,14 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   dio: 0.1.2
+  json_annotation: ^0.2.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  build_runner: ^0.8.9
+  json_serializable: ^0.5.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
@@ -27,14 +30,6 @@ flutter:
   uses-material-design: true
   assets:
         - assets/images/
-#        - assets/images/img.jpg
-#        - assets/images/lebron.jpg
-#        - assets/images/xk.jpg
-#        - assets/images/a001.jpg
-#        - assets/images/a002.jpg
-#        - assets/images/a003.jpg
-#        - assets/images/a004.jpg
-#        - assets/images/a005.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

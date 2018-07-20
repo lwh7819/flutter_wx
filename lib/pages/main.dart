@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'Home.dart';
-import 'FindView.dart';
-import 'ContactView.dart';
-import 'MineView.dart';
-import 'XKTabBar.dart';
+import 'package:flutter_wechat/pages/Home.dart';
+import 'package:flutter_wechat/pages/FindView.dart';
+import 'package:flutter_wechat/pages/ContactView.dart';
+import 'package:flutter_wechat/pages/MineView.dart';
+import 'package:flutter_wechat/pages/XKTabBar.dart';
 
 void main() => runApp(new MyApp());
 

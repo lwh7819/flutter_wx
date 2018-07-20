@@ -1,9 +1,9 @@
 class NetworkServiceResponse<T> {
-  T content;
-  bool success;
+  T data;
+  int code;
   String message;
 
-  NetworkServiceResponse({this.content, this.success, this.message});
+  NetworkServiceResponse({this.data, this.code, this.message});
 }
 
 class MappedNetworkServiceResponse<T> {

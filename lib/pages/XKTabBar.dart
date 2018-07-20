@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wechat/services/model.dart';
+import 'package:flutter_wechat/services/ServierApi.dart';
 
 class XkTabBar extends StatelessWidget {
   var ctx;
@@ -11,7 +11,7 @@ class XkTabBar extends StatelessWidget {
         title: new Text(''),
         actions: <Widget>[
           new IconButton(icon: new Icon(Icons.add, color: Colors.white,),
-              onPressed: () {httpClient(ctx, (value){});}),
+              onPressed: () {}),
         ],
       ),
       body: new Builder(

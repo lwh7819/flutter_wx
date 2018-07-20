@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wechat/services/network_service_response.dart';
-import 'package:flutter_wechat/utils/uidata.dart';
+import 'package:flutter_wechat/services/NetworkResponseModel.dart';
+import 'package:flutter_wechat/utils/CommonData.dart';
 
 fetchApiResult(BuildContext context, NetworkServiceResponse snapshot) {
   showDialog(
