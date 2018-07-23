@@ -21,7 +21,7 @@ class HttpClient1<T> {
       _dio = new Dio();
     }
     _dio.options.baseUrl = baseUrl == null ? "https://httpbin.org/ip" : baseUrl;
-    _dio.options.connectTimeout = 10000;
+    _dio.options.connectTimeout = 100;
     _dio.options.receiveTimeout = 3000;
     _dio.options.headers = headers ?? {};
     _dio.options.contentType = contentType ?? null;
@@ -50,10 +50,9 @@ class HttpClient1<T> {
   }
 
   Future<Response<T>> _sendRequest(ctx, path, params, successCallback, failCallback, Options options,) {
-    print("\nstart--------------------------------------------------------------->" +
-        "\nrequest:" + _dio.options.baseUrl + path +
-        "\nheader" + _dio.options.headers.toString());
-
+    print("\nstart--------------------------------------------------------------->"
+        "\nrequest:${_dio.options.baseUrl}$path"
+        "\nheader:${_dio.options.headers.toString()}");
     Future<Response<T>> future = _dio.request(
         path, data: params, options: options);
 
@@ -98,12 +97,12 @@ class HttpClient1<T> {
       }
       print("\nfail------------------------------------------------------------->");
       if (e.response != null) {
-        print("\ne.response.data:" + e.response.data);
-        print("\ne.response.headers:" + e.response.headers.toString());
-        print("\ne.response.request:" + e.response.request.toString());
-        print("\ne.message:" + e.message);
+        print("\ne.response.data:${e.response.data}");
+        print("\ne.response.headers:${e.response.headers.toString()}");
+        print("\ne.response.request:${e.response.request.toString()}");
+        print("\ne.message:${e.message}");
       } else {
-        print("\ne.message:" + e.message);
+        print("\ne.message:${e.message}");
       }
 
       failCallback(msg);

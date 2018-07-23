@@ -37,7 +37,7 @@ class RandomWordsState extends State<RandomWords> {
   new BottomNavigationBarItem(icon: new Icon(Icons.explore),title: new Text("发现"),),
   new BottomNavigationBarItem(icon: new Icon(Icons.person),title: new Text("我"),),
   ];
-  final List vcSet = [new HomeView(), new ContactView(), new FindView(), new MineView()];
+  final List vcSet = [new HomeView1(), new ContactView(), new FindView(), new MineView()];
   int _sindex = 0;
   @override
   Widget build(BuildContext context) {

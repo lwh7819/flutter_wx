@@ -5,42 +5,41 @@ import '../services/ServierApi.dart';
 import '../utils/DialogUtil.dart';
 import '../view/BaseDialog.dart';
 import '../model/TestModel.dart';
-import 'CommonView.dart';
+//import 'CommonView.dart';
+import 'BaseView.dart';
 
-Widget body;
+String val;
 
-class HomeView extends StatefulWidget {
+class HomeView1 extends BaseView {
   @override
-  createState() => new _HomeViewState();
+  State<StatefulWidget> createBaseState() {
+    return new _HomeViewState();
+  }
+
 }
 
-class _HomeViewState extends State<HomeView> {
-  String _val = '';
-  bool _isError = false;
-  String _errorMsg;
-
+class _HomeViewState extends BaseViewState {
   @override
   void initState() {
     super.initState();
-    _loadData()();
+    loadData()();
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildWidget(BuildContext context) {
     return new Scaffold(
       body: new Builder(
           builder: (BuildContext context) {
-            _val == '' ? body = createLoadingView() : body = _buildListView();
-            if(_isError) {
-              body = createErrorView(_errorMsg, _loadData());
-            }
-            return body;
+            return new Column(children: <Widget>[
+              new Expanded(child: getCurrentBody(),),
+            ],);
           }
       ),
     );
   }
 
-  Widget _buildListView() {
+  @override
+  Widget createStateWidget() {
     List<String> _title = new List();
     _title.add('班主任');
     _title.add('数学老师');
@@ -49,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
     _title.add('科学老师');
     _title.add('生物老师');
     _title.add('物理老师');
-    _title.add(_val);
+    _title.add(val);
     List<String> _img = new List();
     _img.add("assets/images/img.jpg");
     _img.add("assets/images/a001.jpg");
@@ -91,10 +90,12 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Function _loadData() {
+  @override
+  Function loadData() {
       return () {
         setState(() {
-          _isError = false;
+          isError = false;
+          hasLoad = false;
         });
         httpClient1(
           context,
@@ -102,18 +103,18 @@ class _HomeViewState extends State<HomeView> {
             TestModel testModel = new TestModel.fromJson(map);
             print("lwhh" + testModel.origin);
             setState(() {
-              _val = testModel.origin;
+              val = testModel.origin;
+              hasLoad = true;
             });
           },
               (error) {
             print(error.toString());
             setState(() {
-              _isError = true;
-              _errorMsg = error.toString();
+              isError = true;
+              errorMsg = error.toString();
             });
           },
         );
       };
   }
-
 }
