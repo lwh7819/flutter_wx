@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wechat/pages/XKTabBar.dart';
 import '../utils/RouterUtil.dart';
 import '../services/ServierApi.dart';
-import '../utils/DialogUtil.dart';
-import '../view/BaseDialog.dart';
 import '../model/TestModel.dart';
-//import 'CommonView.dart';
 import 'BaseView.dart';
 
 String val;
 
-class HomeView1 extends BaseView {
+class HomeView extends BaseView {
   @override
   State<StatefulWidget> createBaseState() {
     return new _HomeViewState();
@@ -22,7 +19,7 @@ class _HomeViewState extends BaseViewState {
   @override
   void initState() {
     super.initState();
-    loadData()();
+    loadData();
   }
 
   @override
@@ -41,14 +38,14 @@ class _HomeViewState extends BaseViewState {
   @override
   Widget createStateWidget() {
     List<String> _title = new List();
-    _title.add('班主任');
+    _title.add(val);
     _title.add('数学老师');
     _title.add('英语老师');
     _title.add('语文老师');
     _title.add('科学老师');
     _title.add('生物老师');
     _title.add('物理老师');
-    _title.add(val);
+    _title.add('科学老师');
     List<String> _img = new List();
     _img.add("assets/images/img.jpg");
     _img.add("assets/images/a001.jpg");
@@ -91,30 +88,19 @@ class _HomeViewState extends BaseViewState {
   }
 
   @override
-  Function loadData() {
-      return () {
+  void loadData() {
+    super.loadData();
+    httpClient1(
+      context,
+          (Map map) {
+        TestModel testModel = new TestModel.fromJson(map);
+        print("lwhh" + testModel.origin);
         setState(() {
-          isError = false;
-          hasLoad = false;
+          val = testModel.origin;
+          hasLoad = true;
         });
-        httpClient1(
-          context,
-              (Map map) {
-            TestModel testModel = new TestModel.fromJson(map);
-            print("lwhh" + testModel.origin);
-            setState(() {
-              val = testModel.origin;
-              hasLoad = true;
-            });
-          },
-              (error) {
-            print(error.toString());
-            setState(() {
-              isError = true;
-              errorMsg = error.toString();
-            });
-          },
-        );
-      };
+      },
+      onError(),
+    );
   }
 }

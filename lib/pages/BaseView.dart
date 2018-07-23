@@ -36,12 +36,28 @@ abstract class BaseViewState extends State<BaseView>{
    * 数据加载
    */
   @protected
-  Function loadData();
+  @mustCallSuper
+  void loadData() {
+    setState(() {
+      isError = false;
+      hasLoad = false;
+    });
+  }
 
   Widget getCurrentBody() {
     hasLoad == true ? currentBody = createStateWidget() : currentBody = createLoadingView();
-    if(isError) currentBody = createErrorView(errorMsg, loadData());
+    if(isError) currentBody = createErrorView(errorMsg, loadData);
     return currentBody;
+  }
+
+  Function onError() {
+    return (error) {
+      print("error:${error.toString()}");
+      setState(() {
+        isError = true;
+        errorMsg = error.toString();
+      });
+    };
   }
 
 }
@@ -64,18 +80,17 @@ Widget createErrorView(String errorMsg, Function relode) {
             flex: 2,
             child: new Text(''),
           ),
-          new Container(
-//            flex: 3,
+          new Expanded(
+            flex: 3,
               child: new Column(children: <Widget>[
             new Image.asset("assets/images/ic_error.png"),
-            new Container(child: new Text(errorMsg, style: new TextStyle(height: 10.0),),),
+            new Container(child: new Text(errorMsg,),),
             new InkWell(
               child: new Text(
                 '点击重新加载', style: new TextStyle(color: Colors.blue),),
               onTap: relode,)
           ],)),
           new Expanded(child: new Text('')),
-
         ],)
   );
 }

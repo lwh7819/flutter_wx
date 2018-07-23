@@ -4,6 +4,7 @@ import 'package:flutter_wechat/pages/FindView.dart';
 import 'package:flutter_wechat/pages/ContactView.dart';
 import 'package:flutter_wechat/pages/MineView.dart';
 import 'package:flutter_wechat/pages/XKTabBar.dart';
+import 'package:flutter_wechat/utils/RouterUtil.dart';
 
 void main() => runApp(new MyApp());
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       home: new Center(
         child: new RandomWords(),
       ),
-      routes: <String, WidgetBuilder> {
+      routes: <String, WidgetBuilder>{
         '/a': (BuildContext context) => new XkTabBar(),
       },
     );
@@ -32,13 +33,19 @@ class RandomWords extends StatefulWidget {
 }
 
 class RandomWordsState extends State<RandomWords> {
-  final List<BottomNavigationBarItem> listSet = [new BottomNavigationBarItem(icon: new Icon(Icons.chat),title: new Text("微信"),),
-  new BottomNavigationBarItem(icon: new Icon(Icons.perm_contact_calendar),title: new Text("通讯录"),),
-  new BottomNavigationBarItem(icon: new Icon(Icons.explore),title: new Text("发现"),),
-  new BottomNavigationBarItem(icon: new Icon(Icons.person),title: new Text("我"),),
+  final List<BottomNavigationBarItem> listSet = [new BottomNavigationBarItem(
+    icon: new Icon(Icons.chat), title: new Text("微信"),),
+  new BottomNavigationBarItem(
+    icon: new Icon(Icons.perm_contact_calendar), title: new Text("通讯录"),),
+  new BottomNavigationBarItem(
+    icon: new Icon(Icons.explore), title: new Text("发现"),),
+  new BottomNavigationBarItem(
+    icon: new Icon(Icons.person), title: new Text("我"),),
   ];
-  final List vcSet = [new HomeView1(), new ContactView(), new FindView(), new MineView()];
+  final List vcSet = [
+    new HomeView(), new ContactView(), new FindView(), new MineView()];
   int _sindex = 0;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -46,18 +53,21 @@ class RandomWordsState extends State<RandomWords> {
         title: new Text("WeChat"),
         centerTitle: true,
         actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.add, color: Colors.white,), onPressed: (){Navigator.pushNamed(context, '/a');}),
+          new IconButton(
+              icon: new Icon(Icons.add, color: Colors.white,),
+              onPressed: RouterUtil.NavigatorPush(context, new XkTabBar()),
+          ),
         ],
       ),
       bottomNavigationBar: new BottomNavigationBar(
-          items: listSet,
-          type: BottomNavigationBarType.fixed,
-          onTap: (index) {
-            setState(() {
-              _sindex = index;
-            });
-            print("____$index");
-          },
+        items: listSet,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          setState(() {
+            _sindex = index;
+          });
+          print("____$index");
+        },
         currentIndex: _sindex,
         fixedColor: Colors.green,
       ),
