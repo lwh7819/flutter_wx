@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class UIData {
+class CommonData {
   //routes
   static const String homeRoute = "/home";
   static const String profileOneRoute = "/View Profile";
@@ -94,4 +94,5 @@ class UIData {
   static const String image3 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532338601278&di=fc54d337db00b8df4a7f0440ca891b52&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
   static const String image4 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532338679390&di=e0428cebba99fcbf19ad0084dec7455d&imgtype=0&src=http%3A%2F%2Fc.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F09fa513d269759eeef490028befb43166d22df3c.jpg";
   static const String image5 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532338601278&di=fc54d337db00b8df4a7f0440ca891b52&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fb64543a98226cffceee78e5eb5014a90f703ea09.jpg";
+  static const String image6 = "http://img9.3lian.com/c1/vector/10/02/061.jpg";
 }

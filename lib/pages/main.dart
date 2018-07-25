@@ -3,8 +3,8 @@ import 'package:flutter_wechat/pages/Home.dart';
 import 'package:flutter_wechat/pages/FindView.dart';
 import 'package:flutter_wechat/pages/ContactView.dart';
 import 'package:flutter_wechat/pages/MineView.dart';
-import 'package:flutter_wechat/pages/XKTabBar.dart';
 import 'package:flutter_wechat/utils/RouterUtil.dart';
+import 'MyPageView.dart';
 
 void main() => runApp(new MyApp());
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         child: new RandomWords(),
       ),
       routes: <String, WidgetBuilder>{
-        '/a': (BuildContext context) => new XkTabBar(),
+        '/router/xktabbar': (BuildContext context) => new MyPageView(),
       },
     );
   }
@@ -44,7 +44,9 @@ class RandomWordsState extends State<RandomWords> {
   ];
   final List vcSet = [
     new HomeView(), new ContactView(), new FindView(), new MineView()];
+
   int _sindex = 0;
+  final PageController _pageController = new PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +56,8 @@ class RandomWordsState extends State<RandomWords> {
         centerTitle: true,
         actions: <Widget>[
           new IconButton(
-              icon: new Icon(Icons.add, color: Colors.white,),
-              onPressed: RouterUtil.NavigatorPush(context, new XkTabBar()),
+            icon: new Icon(Icons.add, color: Colors.white,),
+            onPressed: RouterUtil.NavigatorPush(context, new MyPageView()),
           ),
         ],
       ),
@@ -63,16 +65,30 @@ class RandomWordsState extends State<RandomWords> {
         items: listSet,
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
-          setState(() {
-            _sindex = index;
-          });
-          print("____$index");
+          _pageController.animateToPage(index, duration: new Duration(milliseconds: 500), curve: Curves.fastOutSlowIn);
         },
         currentIndex: _sindex,
         fixedColor: Colors.green,
       ),
-      body: vcSet[_sindex],
+      body: new LayoutBuilder(
+        builder: (context, constraints) =>
+        new NotificationListener(
+            onNotification: (ScrollNotification note) {
+              setState(() {
+                _sindex = _pageController.page.round();
+                print('sindex:${_sindex}');
+              });
+            },
+            child: new PageView.custom(
+              physics: const PageScrollPhysics(parent: const BouncingScrollPhysics()),
+              controller: _pageController,
+              childrenDelegate: new SliverChildBuilderDelegate(
+                    (context, index) => vcSet[index],
+                childCount: 4,
+              ),
+            )
+        ),
+      ),
     );
   }
-
 }

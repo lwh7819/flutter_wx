@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wechat/utils/CommonData.dart';
 import 'package:flutter_wechat/utils/DialogUtil.dart';
 
-class XkTabBar extends StatefulWidget {
+class CardView extends StatefulWidget {
   @override
-  XkViewState createState() => new XkViewState();
+  CardViewState createState() => new CardViewState();
 }
 
-class XkViewState extends State<XkTabBar> with SingleTickerProviderStateMixin {
+class CardViewState extends State<CardView> with SingleTickerProviderStateMixin {
   Size deviceSize;
   AnimationController controller;
   Animation<double> animation;
@@ -57,11 +57,11 @@ class XkViewState extends State<XkTabBar> with SingleTickerProviderStateMixin {
   List<Widget> ItemList() {
     List<Widget> itemList = new List();
     List<String> imgs = new List();
-    imgs.add(UIData.image1);
-    imgs.add(UIData.image2);
-    imgs.add(UIData.image3);
-    imgs.add(UIData.image4);
-    imgs.add(UIData.image5);
+    imgs.add(CommonData.image1);
+    imgs.add(CommonData.image2);
+    imgs.add(CommonData.image3);
+    imgs.add(CommonData.image4);
+    imgs.add(CommonData.image5);
     bool isLast = false;
     for (int i = 0; i < 5; i++) {
       i == 4 ? isLast = true : isLast = false;

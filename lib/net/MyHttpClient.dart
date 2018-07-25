@@ -10,7 +10,7 @@ Dio _dio = null;
 
 class HttpClient<T> {
   Map<String, dynamic> headers;
-  String baseUrl;
+  var baseUrl;
   ContentType contentType;
 
   HttpClient({

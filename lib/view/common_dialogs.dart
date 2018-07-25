@@ -6,11 +6,11 @@ fetchApiResult(BuildContext context, NetworkServiceResponse snapshot) {
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
-          title: Text(UIData.error),
+          title: Text(CommonData.error),
           content: Text(snapshot.message),
           actions: <Widget>[
             FlatButton(
-              child: Text(UIData.ok),
+              child: Text(CommonData.ok),
               onPressed: () => Navigator.pop(context),
             )
           ],
@@ -22,15 +22,15 @@ showTitleDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      title: Text(UIData.error),
+      title: Text(CommonData.error),
       content: Text('success'),
       actions: <Widget>[
         FlatButton(
-          child: Text(UIData.ok),
+          child: Text(CommonData.ok),
           onPressed: () => Navigator.pop(context),
         ),
         FlatButton(
-          child: Text(UIData.error),
+          child: Text(CommonData.error),
           onPressed: () => Navigator.pop(context),
         )
       ],
@@ -62,7 +62,7 @@ showSuccess(BuildContext context, String message, IconData icon) {
                     Text(
                       message,
                       style: TextStyle(
-                          fontFamily: UIData.ralewayFont, color: Colors.white),
+                          fontFamily: CommonData.ralewayFont, color: Colors.white),
                     )
                   ],
                 ),

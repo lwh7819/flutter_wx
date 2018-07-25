@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_wechat/pages/XKTabBar.dart';
+import 'package:flutter_wechat/pages/CardView.dart';
 import '../utils/RouterUtil.dart';
 import '../services/ServierApi.dart';
 import '../model/TestModel.dart';
@@ -9,9 +9,8 @@ String val;
 
 class HomeView extends BaseView {
   @override
-  State<StatefulWidget> createBaseState() {
-    return new _HomeViewState();
-  }
+  State<StatefulWidget> createBaseState() => new _HomeViewState();
+
 
 }
 
@@ -83,7 +82,7 @@ class _HomeViewState extends BaseViewState {
             _img[index], width: 40.0, height: 40.0, fit: BoxFit.cover),
         subtitle: new Text('你高考满分了你知道吗？'),
         trailing: new Text('09:06'),
-        onTap: RouterUtil.NavigatorPush(context, new XkTabBar())
+        onTap: RouterUtil.NavigatorPush(context, new CardView())
     );
   }
 

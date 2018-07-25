@@ -28,7 +28,7 @@ showAlertDialogSingle(BuildContext ctx, String title, String content,
         content: Text(content),
         actions: <Widget>[
           FlatButton(
-            child: Text(UIData.confirm),
+            child: Text(CommonData.confirm),
             onPressed: postiveCallback ?? () => Navigator.pop(context),
           ),
         ],
@@ -50,11 +50,11 @@ showAlertDialogDouble(BuildContext ctx, String title, String content,
         content: Text(content),
         actions: <Widget>[
           FlatButton(
-            child: Text(UIData.confirm),
+            child: Text(CommonData.confirm),
             onPressed: postiveCallback ?? () => Navigator.pop(context),
           ),
           FlatButton(
-            child: Text(UIData.cancel),
+            child: Text(CommonData.cancel),
             onPressed: negativeCallback ?? () => Navigator.pop(context),
           ),
         ],
