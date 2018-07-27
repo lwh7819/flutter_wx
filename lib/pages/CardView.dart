@@ -7,6 +7,7 @@ class CardView extends StatefulWidget {
   CardViewState createState() => new CardViewState();
 }
 
+// ignore: mixin_inherits_from_not_object
 class CardViewState extends State<CardView> with SingleTickerProviderStateMixin {
   Size deviceSize;
   AnimationController controller;

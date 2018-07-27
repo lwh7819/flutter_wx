@@ -5,8 +5,9 @@ import 'package:flutter_wechat/pages/ContactView.dart';
 import 'package:flutter_wechat/pages/MineView.dart';
 import 'package:flutter_wechat/utils/RouterUtil.dart';
 import 'MyPageView.dart';
+import 'SelfInspection/BaseInfo.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(new MyAppa());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
