@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class DateUtils {
   static formatDateSimple(DateTime dt) {
     StringBuffer sb = new StringBuffer();
@@ -6,6 +8,16 @@ class DateUtils {
     sb.write(dt.month.toString().padLeft(2, '0'));
     sb.write('-');
     sb.write(dt.day.toString().padLeft(2, '0'));
+    return sb.toString();
+  }
+
+  static formatTimeSimple(TimeOfDay tod) {
+    StringBuffer sb = new StringBuffer();
+    sb.write(tod.hour.toString().padLeft(2, '0'));
+    sb.write(':');
+    sb.write(tod.minute.toString().padLeft(2, '0'));
+//    sb.write(':');
+//    sb.write(dt.second.toString().padLeft(2, '0'));
     return sb.toString();
   }
 
@@ -22,6 +34,22 @@ class DateUtils {
     sb.write(dt.minute.toString().padLeft(2, '0'));
     sb.write(':');
     sb.write(dt.second.toString().padLeft(2, '0'));
+    return sb.toString();
+  }
+
+  static formatTimeOfDay(DateTime dt, TimeOfDay tod) {
+    StringBuffer sb = new StringBuffer();
+    sb.write(dt.year);
+    sb.write('-');
+    sb.write(dt.month.toString().padLeft(2, '0'));
+    sb.write('-');
+    sb.write(dt.day.toString().padLeft(2, '0'));
+    sb.write(' ');
+    sb.write(tod.hour.toString().padLeft(2, '0'));
+    sb.write(':');
+    sb.write(tod.minute.toString().padLeft(2, '0'));
+//    sb.write(':');
+//    sb.write(dt.second.toString().padLeft(2, '0'));
     return sb.toString();
   }
 

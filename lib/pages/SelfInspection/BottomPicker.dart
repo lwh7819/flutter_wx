@@ -2,28 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 int _selectedItemIndex = 0;
-String _value;
+var _value;
 
 class BottomPicker extends StatefulWidget {
+  BottomPicker(this.coolColorNames,{
+    Key key,
+  }) : super(key: key)
+
+  // ignore: missing_function_body
+  List coolColorNames;
   @override
   _BottomPickerState createState() => new _BottomPickerState();
 }
 
 class _BottomPickerState extends State<BottomPicker> {
-  List coolColorNames;
 
   @override
   void initState() {
     super.initState();
-    coolColorNames = new List();
-    coolColorNames.add('001');
-    coolColorNames.add('002');
-    coolColorNames.add('003');
-    coolColorNames.add('004');
-    coolColorNames.add('005');
-    coolColorNames.add('006');
-    coolColorNames.add('007');
-    coolColorNames.add('008');
   }
 
   @override
@@ -49,6 +45,7 @@ class _BottomPickerState extends State<BottomPicker> {
     );
   }
 
+  //创建选择滚动列表
   Widget _buildBottomPicker() {
     final FixedExtentScrollController scrollController =
     new FixedExtentScrollController(initialItem: _selectedItemIndex);
@@ -74,13 +71,13 @@ class _BottomPickerState extends State<BottomPicker> {
               onSelectedItemChanged: (int index) {
                 setState(() {
                   _selectedItemIndex = index;
-                  _value = coolColorNames[index];
+                  _value = widget.coolColorNames[index]["value"];
                 });
               },
               children: new List<Widget>.generate(
-                  coolColorNames.length, (int index) {
+                  widget.coolColorNames.length, (int index) {
                 return new Center(child:
-                new Text(coolColorNames[index]),
+                new Text(widget.coolColorNames[index]["label"]),
                 );
               }),
             ),

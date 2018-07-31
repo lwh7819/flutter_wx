@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_wechat/utils/RouterUtil.dart';
+import 'SelfInspection/BaseInfo.dart';
 
 class ContactView extends StatefulWidget {
   @override createState() => new ContactViewState();
@@ -61,6 +63,7 @@ class ContactViewState extends State<ContactView> {
       title: new Text(title),
       leading: new Image.asset(
           icon, width: 40.0, height: 40.0, fit: BoxFit.cover),
+      onTap: RouterUtil.NavigatorPush(context, new BaseInfo()),
     );
   }
 

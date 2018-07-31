@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'BottomPicker.dart';
 import 'RadioGroup.dart';
 import 'package:flutter_wechat/utils/DateUtils.dart';
+import 'dart:async';
+import 'MapData.dart';
+
+var commonpadding = const EdgeInsets.only(top: 20.0, bottom: 20.0);
 
 class CommonRow extends StatefulWidget {
   CommonRow(this.title, this.valueBody,
@@ -26,136 +30,208 @@ class _CommonRowState extends State<CommonRow> {
   }
 }
 
+//创建只读文字行
 Widget TextComponent(title, value) {
   return new CommonRow(
     title,
-    new Text(value,
-      style: new TextStyle(color: Color(0XFF999999), fontSize: 15.0),),);
+    new Container(
+        padding: commonpadding,
+        child: new Text(value,
+          style: new TextStyle(color: Color(0XFF999999), fontSize: 15.0),)),);
 }
 
+//创建输入框
 Widget EditComponent(title, value, enable) {
   return CommonRow(
       title,
-      new TextField(
-        controller: new TextEditingController(text: value),
-        decoration: new InputDecoration.collapsed(hintText: '请输入',
-            hintStyle: new TextStyle(
-                color: Color(0XFF999999), fontSize: 15.0)),
-        enabled: enable,
+      new Container(
+        padding: commonpadding,
+        child: new TextField(
+//          style: new TextStyle(color: Color(0XFF999999), fontSize: 15.0),
+          controller: new TextEditingController(text: value),
+          decoration: new InputDecoration.collapsed(hintText: '请输入',
+              hintStyle: new TextStyle(
+                  color: Color(0XFF999999), fontSize: 15.0)),
+          enabled: enable,
+        ),
       ));
 }
 
-Widget PickerComponent(context, title, value, enable, onChecked) {
+//创建选择器
+Widget PickerComponent(context, title, value, lists, enable, onChecked) {
   return CommonRow(title, new GestureDetector(
-    child: new Row(
-      children: <Widget>[
-        new Expanded(
-          child: new Text(value?.length == 0 ? '请选择' : value,
-            style: new TextStyle(color: Color(0XFF666666), fontSize: 15.0),),
-        ),
-        new Icon(Icons.chevron_right, color: Colors.grey,),
-      ],
+    child: new Container(
+      padding: commonpadding,
+      color: Colors.transparent,
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+            child: new Text(value == null ? '请选择' : getResult(lists, value),
+              style: new TextStyle(color: Color(0XFF666666), fontSize: 15.0),),
+          ),
+          new Icon(Icons.chevron_right, color: Colors.grey,),
+        ],
+      ),
     ),
     onTap: enable ? () {
       showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return new BottomPicker();
+          return new BottomPicker(lists);
         },
       ).then(onChecked);
-    } : (){},
+    } : () {},
   ));
 }
 
+//创建radioGroup
 Widget RadioComponent(title, data, defaultValue, type, enable, onChanged) {
   return CommonRow(
-      title, new RadioGroup(
-    data, defaultValue: defaultValue, type: type, onChanged: onChanged, enable: enable,
+    title, new RadioGroup(
+    data, defaultValue: defaultValue,
+    type: type,
+    onChanged: onChanged,
+    enable: enable,
   ),
   );
 }
 
+//创建单独日期选择器
 Widget DatePickerComponent(context, title, value, enable, onChecked) {
   return CommonRow(title, new GestureDetector(
-    child: new Row(
-      children: <Widget>[
-        new Expanded(
-          child: new Text(value == null ? '请选择' : DateUtils.formatDateSimple(value),
-            style: new TextStyle(color: Color(0XFF666666), fontSize: 15.0),),
-        ),
-        new Icon(Icons.chevron_right, color: Colors.grey,),
-      ],
-    ),
+    child: new Container(
+      padding: commonpadding,
+      color: Colors.transparent,
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+            child: new Text(value == null ? '请选择' : value,
+              style: new TextStyle(color: Color(0XFF666666), fontSize: 15.0),),
+          ),
+          new Icon(Icons.chevron_right, color: Colors.grey,),
+        ],
+      ),),
     onTap: enable ? () {
       showDatePicker(
           context: context,
           initialDate: new DateTime.now(),
           firstDate: new DateTime(1970),
-          lastDate: new DateTime(2050)).then(onChecked);
-    } : (){},
+          lastDate: new DateTime(2050)).then((DateTime dt) {
+        new Future<String>(() =>
+            DateUtils.formatDateTime(dt)).then(onChecked);
+      });
+    } : () {},
   ));
 }
 
+//创建时间选择器
+Widget TimePickerComponent(context, title, value, enable, onChecked) {
+  return CommonRow(title, new GestureDetector(
+    child: new Container(
+      padding: commonpadding,
+      color: Colors.transparent,
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+            child: new Text(value == null ? '请选择' : value,
+              style: new TextStyle(color: Color(0XFF666666), fontSize: 15.0),),
+          ),
+          new Icon(Icons.chevron_right, color: Colors.grey,),
+        ],
+      ),),
+    onTap: enable ? () {
+      showTimePicker(
+        context: context,
+        initialTime: new TimeOfDay.now(),
+      ).then((TimeOfDay tod) {
+        new Future<String>(() =>
+            DateUtils.formatTimeSimple(tod)).then(onChecked);
+      });
+    } : () {},
+  ));
+}
+
+//创建日期选择器精确到分钟
 Widget DateTimePickerComponent(context, title, value, enable, onChecked) {
   return CommonRow(title, new GestureDetector(
-    child: new Row(
-      children: <Widget>[
-        new Expanded(
-          child: new Text(value == null ? '请选择' : DateUtils.formatDateTime(value),
-            style: new TextStyle(color: Color(0XFF666666), fontSize: 15.0),),
-        ),
-        new Icon(Icons.chevron_right, color: Colors.grey,),
-      ],
-    ),
+    child: new Container(
+      padding: commonpadding,
+      color: Colors.transparent,
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+            child: new Text(value == null ? '请选择' : value,
+              style: new TextStyle(color: Color(0XFF666666), fontSize: 15.0),),
+          ),
+          new Icon(Icons.chevron_right, color: Colors.grey,),
+        ],
+      ),),
     onTap: enable ? () {
       showDatePicker(
           context: context,
           initialDate: new DateTime.now(),
           firstDate: new DateTime(1970),
           lastDate: new DateTime(2050))
-          .then((DateTime dateTime){
+          .then((DateTime dateTime) {
         showTimePicker(
             context: context,
             initialTime: TimeOfDay.fromDateTime(dateTime)
-        ).then(onChecked);
+        ).then((TimeOfDay tod) {
+          new Future<String>(() =>
+              DateUtils.formatDateTime(DateTime(
+                  dateTime.year, dateTime.month, dateTime.day, tod.hour,
+                  tod.minute))
+          ).then(onChecked);
+        });
       });
-    } : (){},
+    } : () {},
   ));
 }
 
+//创建基础行
 Widget _commonRow(title, Widget valueBody, hideDiver) {
   return new Container(
     color: Colors.white,
-    child: new Row(
-      children: <Widget>[
-        new Container(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: new Text(title),
-          width: 100.0,
-          alignment: Alignment.centerLeft,
-        ),
-        new Expanded(
-          child: new Container(
-            padding: const EdgeInsets.only(left: 10.0),
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  child: valueBody,
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(top: 20.0),
-                ),
-                !hideDiver ? new Container(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: new Container(
-                    height: 2.0,
-                    color: Colors.grey[100],
+    child: new Column(children: <Widget>[
+      new Row(
+        children: <Widget>[
+          new Container(
+            padding: const EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
+            child: new Text(title),
+            width: 100.0,
+            alignment: Alignment.centerLeft,
+          ),
+          new Expanded(
+            child: new Container(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: new Column(
+                children: <Widget>[
+                  new Container(
+                    child: valueBody,
+                    alignment: Alignment.centerLeft,
                   ),
-                ) : new SizedBox(height: 0.0,)
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      ],
-    ),
+        ],
+      ),
+      new Row(
+        children: <Widget>[
+          new SizedBox(
+            width: 100.0,
+            height: 0.0,
+          ),
+          new Expanded(
+            child: !hideDiver ? new Container(
+              child: new Container(
+                height: 2.0,
+                color: Colors.grey[100],
+              ),
+            ) : new SizedBox(height: 0.0,),
+          ),
+        ],
+      ),
+    ],),
   );
 }

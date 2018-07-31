@@ -5,10 +5,9 @@ import 'package:flutter_wechat/pages/ContactView.dart';
 import 'package:flutter_wechat/pages/MineView.dart';
 import 'package:flutter_wechat/utils/RouterUtil.dart';
 import 'MyPageView.dart';
-import 'SelfInspection/BaseInfo.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() => runApp(new MyAppa());
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -22,11 +21,11 @@ class MyApp extends StatelessWidget {
       home: new Center(
         child: new RandomWords(),
       ),
-      localizationsDelegates: [                             //此处
+      localizationsDelegates: [                             //国际化
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: [                                   //此处
+      supportedLocales: [                                   //国际化
         const Locale('zh','CH'),
         const Locale('en','US'),
       ],

@@ -115,15 +115,15 @@ class _RadioGroupState extends State<RadioGroup> {
 }
 
 String getLabel(data) {
-  String json = JSON.encode(data);
-  Map map = JSON.decode(json);
+  String jsonStr = json.encode(data);
+  Map map = json.decode(jsonStr);
   String str = map["label"];
   return str;
 }
 
 int getValue(data) {
-  String json = JSON.encode(data);
-  Map map = JSON.decode(json);
+  String jsonStr = json.encode(data);
+  Map map = json.decode(jsonStr);
   int value = map["value"];
   return value;
 }

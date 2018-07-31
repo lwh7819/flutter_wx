@@ -59,8 +59,8 @@ class HttpClient<T> {
     return future.then((response) {
       print("\nsuccess--------------------------------------------------------->");
       if (response.statusCode == 200) {
-        String json = JSON.encode(response.data);
-        Map map = JSON.decode(json);
+        String jsonStr = json.encode(response.data);
+        Map map = json.decode(jsonStr);
         successCallback(map);
       } else {
         failCallback(response.statusCode);

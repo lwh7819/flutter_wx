@@ -288,7 +288,7 @@ packages:
       name: matcher
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.12.2"
+    version: "0.12.2+1"
   meta:
     dependency: transitive
     description:
@@ -496,7 +496,7 @@ packages:
       name: vector_math
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.6"
+    version: "2.0.8"
   vm_service_client:
     dependency: transitive
     description:
@@ -526,4 +526,4 @@ packages:
     source: hosted
     version: "2.1.15"
 sdks:
-  dart: ">=2.0.0-dev.65 <=2.0.0-dev.69.0.flutter-937ee2e8ca"
+  dart: ">=2.0.0-dev.65 <=2.0.0-dev.69.4.flutter-08f59e5de3"
