@@ -55,9 +55,10 @@ class _RadioGroupState extends State<RadioGroup> {
         child: new RadioListTile(
           value: value,
           groupValue: widget.defaultValue,
-          title: new Text(title),
+          title: new Text(title,),
           onChanged: widget.enable? widget.onChanged : (e){},
           selected: value == widget.defaultValue,
+          activeColor: widget.enable? Colors.blue : Colors.blue[300],
         )
     );
   }

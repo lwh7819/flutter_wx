@@ -21,6 +21,74 @@ class _BaseInfoState extends State<BaseInfo> {
     enable = infoData['label0'] ?? true;
   }
 
+  int getFastZHPD() {
+    int result = -1;
+    Map fastZHPD = {
+      'label13': infoData['label13'],
+      'label14': infoData['label14'],
+      'label15': infoData['label15'],
+    };
+    fastZHPD.forEach((key, value) {
+      if (value == 0) {
+        result = 0;
+      }
+    });
+    result == 0 ? result = 0 : result = 1;
+    return result;
+  }
+
+  int getSYSJCZHPD() {
+    int result = -1;
+    Map SYSJCZHPD = {
+      'label17': infoData['label17'],
+      'label18': infoData['label18'],
+      'label19': infoData['label19'],
+      'label20': infoData['label20'],
+      'label21': infoData['label21'],
+      'label22': infoData['label22'],
+      'label23': infoData['label23'],
+      'label24': infoData['label24'],
+    };
+    SYSJCZHPD.forEach((key, value) {
+      if(key == 'label19' || key == 'label20') {
+          if(value == 1) {
+            result = 0;
+          }
+      } else {
+        if (value == 0) {
+          result = 0;
+        }
+      }
+    });
+    result == 0 ? result = 0 : result = 1;
+    return result;
+  }
+
+  int getZHPD() {
+    int result = -1;
+    Map ZHPD = {
+      'label3': infoData['label3'],
+      'label4': infoData['label4'],
+      'label5': infoData['label5'],
+      'label6': infoData['label6'],
+      'label7': infoData['label7'],
+      'label8': infoData['label8'],
+      'label9': infoData['label9'],
+      'label10': infoData['label10'],
+      'label11': infoData['label11'],
+      'label12': infoData['label12'],
+      'label16': infoData['label16'],
+      'label25': infoData['label25'],
+    };
+    ZHPD.forEach((key, value) {
+      if (value == 0) {
+        result = 0;
+      }
+    });
+    result == 0 ? result = 0 : result = 1;
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -61,6 +129,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label4'] = e;
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -73,6 +142,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label5'] = e;
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -85,6 +155,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label6'] = e;
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -97,6 +168,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label7'] = e;
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -109,6 +181,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label8'] = e;
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -121,6 +194,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label9'] = e;
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -133,6 +207,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label10'] = e;
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -145,6 +220,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label11'] = e;
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -157,6 +233,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label12'] = e;
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -170,12 +247,14 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label13'] = e;
+                  infoData['label16'] = getFastZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
               infoData['label13'] == 0
                   ? EditComponent(
                   '余氯检测值', infoData['label13_'], enable, (String value) {
-                      infoData['label13_'] = value;
+                infoData['label13_'] = value;
               })
                   : Diver(),
 
@@ -188,11 +267,14 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label14'] = e;
+                  infoData['label16'] = getFastZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
               infoData['label14'] == 0
-                  ? EditComponent('浑浊度检测值', infoData['label14_'], enable, (String value) {
-                  infoData['label14_'] = value;
+                  ? EditComponent(
+                  '浑浊度检测值', infoData['label14_'], enable, (String value) {
+                infoData['label14_'] = value;
               })
                   : Diver(),
 
@@ -205,11 +287,14 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label15'] = e;
+                  infoData['label16'] = getFastZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
               infoData['label15'] == 0
-                  ? EditComponent('PH检测值', infoData['label15_'], enable, (String value) {
-                  infoData['label15_'] = value;
+                  ? EditComponent(
+                  'PH检测值', infoData['label15_'], enable, (String value) {
+                infoData['label15_'] = value;
               })
                   : Diver(),
 
@@ -219,7 +304,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   infoData['label16'],
                   true,
                   RadioLayoutType.SingleLine,
-                  enable, (e) {
+                  false, (e) {
                 setState(() {
                   infoData['label16'] = e;
                 });
@@ -235,11 +320,14 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label17'] = e;
+                  infoData['label25'] = getSYSJCZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
               infoData['label17'] == 0
-                  ? EditComponent('色度检测值', infoData['label17_'], enable, (String value) {
-                  infoData['label17_'] = value;
+                  ? EditComponent(
+                  '色度检测值', infoData['label17_'], enable, (String value) {
+                infoData['label17_'] = value;
               })
                   : Diver(),
 
@@ -252,11 +340,14 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label18'] = e;
+                  infoData['label25'] = getSYSJCZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
               infoData['label18'] == 0
-                  ? EditComponent('浑浊度检测值', infoData['label18_'], enable, (String value) {
-                  infoData['label18_'] = value;
+                  ? EditComponent(
+                  '浑浊度检测值', infoData['label18_'], enable, (String value) {
+                infoData['label18_'] = value;
               })
                   : Diver(),
 
@@ -269,11 +360,14 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label19'] = e;
+                  infoData['label25'] = getSYSJCZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
               infoData['label19'] == 1
-                  ? EditComponent('臭和味检测值', infoData['label19_'], enable, (String value) {
-                  infoData['label19_'] = value;
+                  ? EditComponent(
+                  '臭和味检测值', infoData['label19_'], enable, (String value) {
+                infoData['label19_'] = value;
               })
                   : Diver(),
 
@@ -286,11 +380,13 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label20'] = e;
+                  infoData['label25'] = getSYSJCZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
               infoData['label20'] == 1 ? EditComponent(
                   '肉眼可见物检测值', infoData['label20_'], enable, (String value) {
-                  infoData['label20_'] = value;
+                infoData['label20_'] = value;
               }) : Diver(),
 
               RadioComponent(
@@ -302,11 +398,14 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label21'] = e;
+                  infoData['label25'] = getSYSJCZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
               infoData['label21'] == 0
-                  ? EditComponent('PH检测值', infoData['label21_'], enable, (String value) {
-                  infoData['label21_'] = value;
+                  ? EditComponent(
+                  'PH检测值', infoData['label21_'], enable, (String value) {
+                infoData['label21_'] = value;
               })
                   : Diver(),
 
@@ -319,7 +418,8 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label22'] = e;
-                  print('$infoData');
+                  infoData['label25'] = getSYSJCZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
@@ -332,18 +432,21 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label23'] = e;
+                  infoData['label25'] = getSYSJCZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
               infoData['label23'] == 0 ? EditComponent(
                   '消毒剂余量检测值', infoData['label23_'], enable, (String value) {
-                  infoData['label23_'] = value;
+                infoData['label23_'] = value;
               }) : Diver(),
 
-              EditComponent('其他监测内容', infoData['label27_'], enable, (String value) {
+              EditComponent(
+                  '其他监测内容', infoData['label27_'], enable, (String value) {
                 infoData['label27_'] = value;
               }),
 
-             RadioComponent(
+              RadioComponent(
                   '其他监测内容是否合格',
                   radioYesNo,
                   infoData['label24'],
@@ -352,12 +455,14 @@ class _BaseInfoState extends State<BaseInfo> {
                   enable, (e) {
                 setState(() {
                   infoData['label24'] = e;
+                  infoData['label25'] = getSYSJCZHPD();
+                  infoData['label26'] = getZHPD();
                 });
               }),
 
-           infoData['label24'] == 0 ? EditComponent(
+              infoData['label24'] == 0 ? EditComponent(
                   '其他监测内容检测值', infoData['label24_'], enable, (String value) {
-                  infoData['label24_'] = value;
+                infoData['label24_'] = value;
               }) : Diver(),
 
               RadioComponent(
@@ -366,7 +471,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   infoData['label25'],
                   true,
                   RadioLayoutType.SingleLine,
-                  enable, (e) {
+                  false, (e) {
                 setState(() {
                   infoData['label25'] = e;
                 });
@@ -379,7 +484,7 @@ class _BaseInfoState extends State<BaseInfo> {
                   infoData['label26'],
                   true,
                   RadioLayoutType.SingleLine,
-                  enable, (e) {
+                  false, (e) {
                 setState(() {
                   infoData['label26'] = e;
                 });
