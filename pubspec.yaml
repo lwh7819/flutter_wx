@@ -1,6 +1,11 @@
 name: flutter_wechat
 description: A new Flutter application.
 
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
@@ -8,15 +13,14 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
-  dio: 0.1.2
+  cupertino_icons: ^1.0.0
+  dio: ^3.0.9 #latest version
   json_annotation: ^0.2.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^0.8.9
   json_serializable: ^0.5.4
 
   flutter_localizations:

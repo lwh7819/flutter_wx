@@ -13,7 +13,7 @@ class RadioGroup extends StatefulWidget {
         this.defaultValue,
         this.type,
         this.onChanged,
-        this.enable = true}) : super(key: key)
+        this.enable = true}) : super(key: key);
 
   // ignore: missing_function_body
   List data;

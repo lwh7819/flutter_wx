@@ -7,7 +7,7 @@ var _value;
 class BottomPicker extends StatefulWidget {
   BottomPicker(this.coolColorNames,{
     Key key,
-  }) : super(key: key)
+  }) : super(key: key);
 
   // ignore: missing_function_body
   List coolColorNames;

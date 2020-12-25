@@ -11,7 +11,7 @@ class CommonRow extends StatefulWidget {
   CommonRow(this.title, this.valueBody,
       {Key key,
         this.hideDiver = false,
-      }) :super(key: key)
+      }) :super(key: key);
 
 
   // ignore: missing_function_body

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/src/Options.dart';
 import 'dart:convert';
 import 'package:flutter_wechat/utils/SnackBarUtil.dart';
 import 'dart:io';
@@ -11,7 +10,7 @@ Dio _dio = null;
 class HttpClient<T> {
   Map<String, dynamic> headers;
   var baseUrl;
-  ContentType contentType;
+  String contentType;
 
   HttpClient({
     this.headers,
